@@ -11,9 +11,13 @@ function App() {
   const [tasks, setTasks] = useState(TASKS)
   const [selectCategory, setSelectCategory] = useState("All")
 
-  function onDeleteTask(taskToBeDeleted) {
-    const filterTask = tasks.filter(task => taskToBeDeleted !== task)
+  function onDeleteTask(taskToBeDeletedId) {
+    const filterTask = tasks.filter(task => taskToBeDeletedId !== task.id)
     setTasks(filterTask)
+  }
+
+  function onTaskFormSubmit(newTask) {
+    setTasks([...tasks, newTask])
   }
 
   return (
@@ -24,11 +28,10 @@ function App() {
         selectCategory={selectCategory}
         setSelectCategory={setSelectCategory}
       />
-      <NewTaskForm />
+      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={onTaskFormSubmit} />
       <TaskList
         tasks={tasks}
         selectCategory={selectCategory}
-        setSelectCategory={setSelectCategory}
         onDeleteTask={onDeleteTask}
       />
     </div>
