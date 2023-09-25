@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-function CategoryFilter({ categories }) {
-  const [selectCategory, setSelectCategory] = useState("All")
-  const onCategoryClicked = (category) => {
+function CategoryFilter({ categories, selectCategory, setSelectCategory }) {
+
+  function onCategoryClicked(category) {
     setSelectCategory(category)
   }
 
-  const displayCategoryList = categories.map((category) => {
+  const displayCategoryButtons = categories.map((category) => {
     return <button className={`${selectCategory === category ? "selected" : ""}`} key={category} onClick={() => onCategoryClicked(category)
     }> {category}</button >
   })
@@ -14,7 +14,7 @@ function CategoryFilter({ categories }) {
   return (
     <div className="categories">
       <h5>Category filters</h5>
-      {displayCategoryList}
+      {displayCategoryButtons}
     </div>
   );
 }

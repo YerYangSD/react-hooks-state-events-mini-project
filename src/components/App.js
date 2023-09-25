@@ -9,8 +9,9 @@ console.log({ CATEGORIES, TASKS });
 
 function App() {
   const [tasks, setTasks] = useState(TASKS)
+  const [selectCategory, setSelectCategory] = useState("All")
 
-  const onDeleteTask = (taskToBeDeleted) => {
+  function onDeleteTask(taskToBeDeleted) {
     const filterTask = tasks.filter(task => taskToBeDeleted !== task)
     setTasks(filterTask)
   }
@@ -18,9 +19,18 @@ function App() {
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={CATEGORIES} />
+      <CategoryFilter
+        categories={CATEGORIES}
+        selectCategory={selectCategory}
+        setSelectCategory={setSelectCategory}
+      />
       <NewTaskForm />
-      <TaskList tasks={tasks} onDeleteTask={onDeleteTask} />
+      <TaskList
+        tasks={tasks}
+        selectCategory={selectCategory}
+        setSelectCategory={setSelectCategory}
+        onDeleteTask={onDeleteTask}
+      />
     </div>
   );
 }
